@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - node -v
+      - npm -v
+
+  pre_build:
+    commands:
+      - npm ci
+      # (선택) 코드 품질 체크하고 싶으면 켜기
+      # - npm run lint
+
+  build:
+    commands:
+      - npm run build
+      - ls -al dist
+
+artifacts:
+  base-directory: dist
+  files:
+    - '**/*'
+
+cache:
+  paths:
+    - node_modules/**/*
